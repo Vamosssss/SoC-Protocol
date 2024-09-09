@@ -32,7 +32,10 @@ module sync_fifo #(
 	else if (pop)	rd_ptr	<= rd_ptr + 1;
 	
 	assign dout = mem[rd_ptr];
-		
+	
+	/*wire [DEPTH_LOG-1:0] rd_ptr_2 = rd_ptr + pop - 1;
+	assign	dout	= mem[rd_ptr_2];*/                  //Keep data after pop until next data
+	
 	always @(posedge clk, negedge rstn)
 	if		(!rstn)	diff_ptr <= 0;
 	else			diff_ptr <= diff_ptr + push - pop;	
